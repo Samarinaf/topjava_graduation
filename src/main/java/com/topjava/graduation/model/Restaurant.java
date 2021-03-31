@@ -1,18 +1,33 @@
 package com.topjava.graduation.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
+@Entity
+@Table(name = "restaurants")
 public class Restaurant extends AbstractBaseEntity {
+
+    @Column(name = "name", nullable = false)
+    @NotBlank
     private String name;
+
+    @Column(name = "rating", nullable = false)
+    @NotNull
     private Double rating;
-    private Menu menu;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    private List<Dish> lunchMenu;
 
     public Restaurant() {
     }
 
-    public Restaurant(Integer id, String name, Double rating, Menu menu) {
+    public Restaurant(Integer id, String name, Double rating, List<Dish> lunchMenu) {
         super(id);
         this.name = name;
         this.rating = rating;
-        this.menu = menu;
+        this.lunchMenu = lunchMenu;
     }
 
     public String getName() {
@@ -31,11 +46,20 @@ public class Restaurant extends AbstractBaseEntity {
         this.rating = rating;
     }
 
-    public Menu getMenu() {
-        return menu;
+    public List<Dish> getLunchMenu() {
+        return lunchMenu;
     }
 
-    public void setMenu(Menu menu) {
-        this.menu = menu;
+    public void setLunchMenu(List<Dish> lunchMenu) {
+        this.lunchMenu = lunchMenu;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", rating=" + rating +
+                '}';
     }
 }

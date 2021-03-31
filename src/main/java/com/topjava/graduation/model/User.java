@@ -1,22 +1,55 @@
 package com.topjava.graduation.model;
 
+import org.springframework.util.CollectionUtils;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.EnumSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "users")
 public class User extends AbstractBaseEntity {
+
+    @Column(name = "name", nullable = false)
+    @NotBlank
     private String name;
+
+    @Column(name = "email", nullable = false, unique = true)
+    @Email
+    @NotBlank
     private String email;
+
+    @Column(name = "password", nullable = false)
+    @NotBlank
+    @Size(min = 5, max = 100)
     private String password;
+
+    @Column(name = "enabled", nullable = false, columnDefinition = "default true")
     private boolean enabled;
-    private Role role;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     public User() {
     }
 
-    public User(Integer id, String name, String email, String password, boolean enabled, Role role) {
+    public User(Integer id, String name, String email, String password, boolean enabled, Role role, Role... roles) {
+        this(id, name, email, password, true, EnumSet.of(role, roles));
+    }
+
+    public User(Integer id, String name, String email, String password, boolean enabled, Set<Role> roles) {
         super(id);
         this.name = name;
         this.email = email;
         this.password = password;
         this.enabled = enabled;
-        this.role = role;
+        setRoles(roles);
     }
 
     public String getName() {
@@ -51,11 +84,23 @@ public class User extends AbstractBaseEntity {
         this.enabled = enabled;
     }
 
-    public Role getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", roles=" + roles +
+                '}';
     }
 }
