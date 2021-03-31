@@ -1,8 +1,5 @@
 package com.topjava.graduation.model;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -19,10 +16,6 @@ public class Dish extends AbstractBaseEntity {
     @NotNull
     private Integer price;
 
-    @Column(name = "description", nullable = false)
-    @NotBlank
-    private String description;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
 //    @OnDelete(action = OnDeleteAction.CASCADE)
@@ -31,15 +24,14 @@ public class Dish extends AbstractBaseEntity {
     public Dish() {
     }
 
-    public Dish(String name, Integer price, String description) {
-        this(null, name, price, description);
+    public Dish(String name, Integer price) {
+        this(null, name, price);
     }
 
-    public Dish(Integer id, String name, Integer price, String description) {
+    public Dish(Integer id, String name, Integer price) {
         super(id);
         this.name = name;
         this.price = price;
-        this.description = description;
     }
 
     public String getName() {
@@ -58,14 +50,6 @@ public class Dish extends AbstractBaseEntity {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Restaurant getRestaurant() {
         return restaurant;
     }
@@ -80,7 +64,6 @@ public class Dish extends AbstractBaseEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", description='" + description + '\'' +
                 '}';
     }
 }

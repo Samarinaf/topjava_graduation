@@ -15,7 +15,7 @@ public class Restaurant extends AbstractBaseEntity {
 
     @Column(name = "rating", nullable = false)
     @NotNull
-    private Double rating;
+    private Integer rating;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private List<Dish> lunchMenu;
@@ -23,7 +23,7 @@ public class Restaurant extends AbstractBaseEntity {
     public Restaurant() {
     }
 
-    public Restaurant(Integer id, String name, Double rating, List<Dish> lunchMenu) {
+    public Restaurant(Integer id, String name, Integer rating, List<Dish> lunchMenu) {
         super(id);
         this.name = name;
         this.rating = rating;
@@ -38,11 +38,11 @@ public class Restaurant extends AbstractBaseEntity {
         this.name = name;
     }
 
-    public Double getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
