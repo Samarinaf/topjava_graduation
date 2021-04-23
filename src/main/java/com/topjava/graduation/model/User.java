@@ -42,7 +42,7 @@ public class User extends AbstractBaseEntity {
     public User() {
     }
 
-    public User(Integer id, String name, String email, String password, boolean enabled, Role role, Role... roles) {
+    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
         this(id, name, email, password, true, EnumSet.of(role, roles));
     }
 
