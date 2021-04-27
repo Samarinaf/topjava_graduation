@@ -20,11 +20,11 @@ VALUES ('BlueRestaurant'), --1002
        ('BlackRestaurant'), --1004
        ('YellowRestaurant'); --1005
 
-INSERT INTO dishes (name, price, restaurant_id)
-VALUES ('Chicken', 780, 1002),
-       ('Coffee', 250, 1002);
+INSERT INTO dishes (name, price, date, restaurant_id)
+VALUES ('Pasta', 780, '2021-04-12', 1002), --BlueRestaurant
+       ('Coffee', 250,'2021-04-12', 1002); --BlueRestaurant
 
 INSERT INTO votes (date, user_id, restaurant_id)
-VALUES ('2021-04-12', 1001, 1002),
-       ('2021-04-11', 1001, 1005),
-       ('2021-04-11', 1000, 1003);
+VALUES ('2021-04-12', 1000, 1002),
+       ('2021-04-13', 1000, 1005),
+       ('2021-04-14', 1000, 1003);

@@ -1,8 +1,12 @@
 package com.topjava.graduation.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "dishes")
@@ -16,9 +20,13 @@ public class Dish extends AbstractBaseEntity {
     @NotNull
     private Integer price;
 
+    @Column(name = "date", nullable = false)
+    @NotNull
+    private LocalDate date;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
     public Dish() {
