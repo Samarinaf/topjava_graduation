@@ -1,7 +1,5 @@
 https://github.com/JavaWebinar/topjava/blob/doc/doc/graduation.md
 
-TASK:
-
 Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) without frontend.
 
 The task is:
