@@ -2,8 +2,17 @@ package com.topjava.graduation.util;
 
 import com.topjava.graduation.model.AbstractBaseEntity;
 import com.topjava.graduation.util.exception.NotFoundException;
+import com.topjava.graduation.util.exception.TimeExpiredException;
+
+import java.time.LocalTime;
 
 public class ValidationUtil {
+
+    public static void checkTimeIsAvailable() {
+        if (LocalTime.now().isAfter(LocalTime.of(11, 0))) {
+            throw new TimeExpiredException("Not possible to change the vote after 11a.m.");
+        }
+    }
 
     public static <T> T checkNotFoundWithId(T object, int id) {
         checkNotFoundWithId(object != null, id);
@@ -34,7 +43,7 @@ public class ValidationUtil {
     public static void assureIdConsistent(AbstractBaseEntity entity, int id) {
         if (entity.isNew()) {
             entity.setId(id);
-        } else if (entity.getId() != id) {
+        } else if (entity.id() != id) {
             throw new IllegalArgumentException(entity + " must be with id=" + id);
         }
     }
