@@ -30,6 +30,11 @@
 
         <!-- DB -->
         <hsqldb.version>2.5.1</hsqldb.version>
+
+        <!--Test -->
+        <junit.jupiter.version>5.7.1</junit.jupiter.version>
+        <hamcrest.version>2.2</hamcrest.version>
+        <assertj.version>3.19.0</assertj.version>
     </properties>
 
     <dependencies>
@@ -63,10 +68,6 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring-data-jpa.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
 
         <!--- ORM -->
         <dependency>
@@ -86,6 +87,32 @@
             <artifactId>hsqldb</artifactId>
             <version>${hsqldb.version}</version>
         </dependency>
+
+        <!--Test-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+
 </dependencies>
 
     <dependencyManagement>

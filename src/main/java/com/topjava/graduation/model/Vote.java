@@ -12,13 +12,11 @@ public class Vote extends AbstractBaseEntity {
     @NotNull
     private LocalDate date;
 
-    @Column(name = "user_id")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull
     private User user;
 
-    @Column(name = "restaurant_id")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     @NotNull
