@@ -18,25 +18,6 @@ public class UserServiceTest extends AbstractServiceTest {
     private UserService userService;
 
     @Test
-    public void create() {
-        User created = userService.create(getNew());
-        User newUser = getNew();
-        newUser.setId(created.id());
-        USER_MATCHER.assertMatch(created, newUser);
-        USER_MATCHER.assertMatch(userService.get(created.id()), newUser);
-    }
-
-    @Test
-    public void createWithDuplicateEmail() {
-        assertThrows(DataAccessException.class, () -> userService.create(getNewWithDuplicateEmail()));
-    }
-
-    @Test
-    public void createNull() {
-        assertThrows(IllegalArgumentException.class, () -> userService.create(null));
-    }
-
-    @Test
     public void get() {
         USER_MATCHER.assertMatch(userService.get(USER_ID), user);
     }
@@ -57,6 +38,36 @@ public class UserServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    public void delete() {
+        userService.delete(USER_ID);
+        assertThrows(NotFoundException.class, () -> userService.get(USER_ID));
+    }
+
+    @Test
+    public void deleteNotFound() {
+        assertThrows(NotFoundException.class, () -> userService.delete(TestMatcher.NOT_FOUND));
+    }
+
+    @Test
+    public void create() {
+        User created = userService.create(getNew());
+        User newUser = getNew();
+        newUser.setId(created.id());
+        USER_MATCHER.assertMatch(created, newUser);
+        USER_MATCHER.assertMatch(userService.get(created.id()), newUser);
+    }
+
+    @Test
+    public void createWithDuplicateEmail() {
+        assertThrows(DataAccessException.class, () -> userService.create(getNewWithDuplicateEmail()));
+    }
+
+    @Test
+    public void createNull() {
+        assertThrows(IllegalArgumentException.class, () -> userService.create(null));
+    }
+
+    @Test
     public void update() {
         userService.update(getUpdated()); //user
         USER_MATCHER.assertMatch(userService.get(USER_ID), getUpdated());
@@ -65,5 +76,12 @@ public class UserServiceTest extends AbstractServiceTest {
     @Test
     public void updateNull() {
         assertThrows(IllegalArgumentException.class, () -> userService.update(null));
+    }
+
+    @Test
+    public void updateNotFound() {
+        User updated = getUpdated();
+        updated.setId(TestMatcher.NOT_FOUND);
+        assertThrows(NotFoundException.class, () -> userService.update(updated));
     }
 }
