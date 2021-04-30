@@ -3,6 +3,7 @@ package com.topjava.graduation;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestMatcher<T> {
+    public static final int NOT_FOUND = 1;
     private final String[] fieldsToIgnore;
 
     private TestMatcher(String... fieldsToIgnore) {

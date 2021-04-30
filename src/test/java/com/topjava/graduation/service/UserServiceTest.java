@@ -1,5 +1,6 @@
 package com.topjava.graduation.service;
 
+import com.topjava.graduation.TestMatcher;
 import com.topjava.graduation.model.User;
 import com.topjava.graduation.util.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ public class UserServiceTest extends AbstractServiceTest {
 
     @Test
     public void getNotFound() {
-        assertThrows(NotFoundException.class, () -> userService.get(NOT_FOUND)); //id = 1
+        assertThrows(NotFoundException.class, () -> userService.get(TestMatcher.NOT_FOUND)); //id = 1
     }
 
     @Test
