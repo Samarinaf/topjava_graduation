@@ -1,8 +1,8 @@
 package com.topjava.graduation.service;
 
 import com.topjava.graduation.TestMatcher;
+import com.topjava.graduation.data.RestaurantTestData;
 import com.topjava.graduation.model.Dish;
-import com.topjava.graduation.model.Restaurant;
 import com.topjava.graduation.util.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class DishServiceTest extends AbstractServiceTest {
     @Test
     public void create() {
         Dish newDish = getNew();
-        newDish.setRestaurant(new Restaurant(1002, "BlueRestaurant"));
+        newDish.setRestaurant(RestaurantTestData.restaurant);
         Dish created = dishService.create(newDish);
         newDish.setId(created.id());
         DISH_MATCHER.assertMatch(created, newDish);
@@ -59,7 +59,7 @@ public class DishServiceTest extends AbstractServiceTest {
     @Test
     public void update() {
         Dish updated = getUpdated();
-        updated.setRestaurant(new Restaurant(1002, "BlueRestaurant"));
+        updated.setRestaurant(RestaurantTestData.restaurant);
         dishService.update(updated);
         DISH_MATCHER.assertMatch(dishService.get(DISH_ID), updated);
     }

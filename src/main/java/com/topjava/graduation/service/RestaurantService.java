@@ -19,7 +19,7 @@ public class RestaurantService {
     }
 
     public Restaurant get(int id) {
-        return checkNotFoundWithId(restaurantRepository.getOne(id), id);
+        return checkNotFoundWithId(restaurantRepository.findById(id).orElse(null), id);
     }
 
     public void delete(int id) {
@@ -37,6 +37,7 @@ public class RestaurantService {
 
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
-        checkNotFoundWithId(restaurantRepository.getOne(restaurant.id()), restaurant.id());
+        checkNotFoundWithId(restaurantRepository.findById(restaurant.id()).orElse(null), restaurant.id());
+        restaurantRepository.save(restaurant);
     }
 }
