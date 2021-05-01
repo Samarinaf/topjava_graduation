@@ -19,7 +19,7 @@ public class VoteService {
     }
 
     public Vote get(int id) {
-        return checkNotFoundWithId(voteRepository.getOne(id), id);
+        return checkNotFoundWithId(voteRepository.findById(id).orElse(null), id);
     }
 
     public void delete(int id) {
@@ -37,7 +37,7 @@ public class VoteService {
 
     public void update(Vote vote) {
         Assert.notNull(vote, "vote must not be null");
-        checkNotFoundWithId(voteRepository.getOne(vote.id()), vote.id());
+        checkNotFoundWithId(voteRepository.findById(vote.id()).orElse(null), vote.id());
         voteRepository.save(vote);
     }
 }
