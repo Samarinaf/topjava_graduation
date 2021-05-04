@@ -5,6 +5,7 @@ import com.topjava.graduation.repository.VoteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.topjava.graduation.util.ValidationUtil.checkNotFoundWithId;
@@ -28,6 +29,10 @@ public class VoteService {
 
     public List<Vote> getAll() {
         return voteRepository.findAll();
+    }
+
+    public List<Vote> getAllByDate(LocalDate date) {
+        return voteRepository.findAllByDate(date);
     }
 
     public Vote create(Vote vote) {
