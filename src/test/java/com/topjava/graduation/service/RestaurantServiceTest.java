@@ -1,10 +1,13 @@
 package com.topjava.graduation.service;
 
 import com.topjava.graduation.TestMatcher;
+import com.topjava.graduation.data.DishTestData;
 import com.topjava.graduation.model.Restaurant;
 import com.topjava.graduation.util.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Arrays;
 
 import static com.topjava.graduation.data.RestaurantTestData.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,6 +20,13 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     @Test
     public void get() {
         RESTAURANT_MATCHER.assertMatch(restaurantService.get(RESTAURANT_ID), restaurant);
+    }
+
+    @Test
+    public void detWithDishes() {
+        Restaurant created = restaurant;
+        created.setLunchMenu(Arrays.asList(DishTestData.dish, DishTestData.dish_3, DishTestData.dish_8));
+        RESTAURANT_WITH_LUNCH_MENU_MATCHER.assertMatch(restaurantService.getWithDishes(RESTAURANT_ID), created);
     }
 
     @Test

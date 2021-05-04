@@ -63,4 +63,10 @@ public class RestaurantRestController {
         ValidationUtil.assureIdConsistent(restaurant, id);
         restaurantService.update(restaurant);
     }
+
+    @GetMapping("/{id}/with-lunch-menu")
+    public Restaurant getWithLunchMenu(@PathVariable int id) {
+        log.info("get {} with dishes", id);
+        return restaurantService.getWithDishes(id);
+    }
 }

@@ -1,6 +1,7 @@
 package com.topjava.graduation.repository;
 
 import com.topjava.graduation.model.Restaurant;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +15,8 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     @Transactional
     @Query("DELETE FROM Restaurant r WHERE r.id=:id")
     int delete(@Param("id") int id);
+
+    @EntityGraph(attributePaths = {"lunchMenu"}, type = EntityGraph.EntityGraphType.LOAD)
+    @Query("SELECT r FROM Restaurant r WHERE r.id=:id")
+    Restaurant getWithDishes(@Param("id") int id);
 }
