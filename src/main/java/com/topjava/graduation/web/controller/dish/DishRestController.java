@@ -1,4 +1,4 @@
-package com.topjava.graduation.web;
+package com.topjava.graduation.web.controller.dish;
 
 import com.topjava.graduation.model.Dish;
 import com.topjava.graduation.service.DishService;

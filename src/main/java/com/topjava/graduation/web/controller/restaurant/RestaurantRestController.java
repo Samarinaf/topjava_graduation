@@ -1,4 +1,4 @@
-package com.topjava.graduation.web;
+package com.topjava.graduation.web.controller.restaurant;
 
 import com.topjava.graduation.model.Restaurant;
 import com.topjava.graduation.service.RestaurantService;

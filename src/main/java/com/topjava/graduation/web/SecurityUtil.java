@@ -1,7 +1,5 @@
 package com.topjava.graduation.web;
 
-
-import com.topjava.graduation.AuthorizedUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 

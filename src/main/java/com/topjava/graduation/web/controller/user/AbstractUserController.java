@@ -1,4 +1,4 @@
-package com.topjava.graduation.web.user;
+package com.topjava.graduation.web.controller.user;
 
 import com.topjava.graduation.model.User;
 import com.topjava.graduation.service.UserService;

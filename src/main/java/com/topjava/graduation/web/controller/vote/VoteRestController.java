@@ -1,4 +1,4 @@
-package com.topjava.graduation.web;
+package com.topjava.graduation.web.controller.vote;
 
 import com.topjava.graduation.model.Vote;
 import com.topjava.graduation.service.VoteService;
@@ -69,6 +69,7 @@ public class VoteRestController {
     public void update(@Valid @RequestBody Vote vote, @PathVariable int id) {
         log.info("update {} with id={}", vote, id);
         ValidationUtil.assureIdConsistent(vote, id);
+        //TimeExpiredException is thrown if try to update after 11 a.m.
         ValidationUtil.checkTimeIsAvailable();
         voteService.update(vote);
     }

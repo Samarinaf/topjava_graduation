@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <bean class="com.topjava.graduation.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
+    <bean class="com.topjava.graduation.web.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
 
     <mvc:default-servlet-handler/>
 

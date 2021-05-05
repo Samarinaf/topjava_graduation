@@ -1,8 +1,8 @@
 package com.topjava.graduation.service;
 
-import com.topjava.graduation.AuthorizedUser;
 import com.topjava.graduation.model.User;
 import com.topjava.graduation.repository.UserRepository;
+import com.topjava.graduation.web.AuthorizedUser;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;

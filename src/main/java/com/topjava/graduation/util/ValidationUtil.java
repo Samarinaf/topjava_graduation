@@ -10,7 +10,7 @@ public class ValidationUtil {
 
     public static void checkTimeIsAvailable() {
         if (LocalTime.now().isAfter(LocalTime.of(11, 0))) {
-            throw new TimeExpiredException("Not possible to change the vote after 11a.m.");
+            throw new TimeExpiredException("Not possible to change the vote after 11 a.m.");
         }
     }
 
