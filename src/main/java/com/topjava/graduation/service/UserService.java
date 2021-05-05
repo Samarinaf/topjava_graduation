@@ -1,7 +1,10 @@
 package com.topjava.graduation.service;
 
+import com.topjava.graduation.AuthorizedUser;
 import com.topjava.graduation.model.User;
 import com.topjava.graduation.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -10,8 +13,8 @@ import java.util.List;
 import static com.topjava.graduation.util.ValidationUtil.checkNotFound;
 import static com.topjava.graduation.util.ValidationUtil.checkNotFoundWithId;
 
-@Service
-public class UserService {
+@Service("userService")
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -45,5 +48,14 @@ public class UserService {
     public User getByEmail(String email) {
         Assert.notNull(email, "email must not be null");
         return checkNotFound(userRepository.getByEmail(email), "email=" + email);
+    }
+
+    @Override
+    public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.getByEmail(email.toLowerCase());
+        if (user == null) {
+            throw new UsernameNotFoundException("User with email=" + email + " is not found");
+        }
+        return new AuthorizedUser(user);
     }
 }
