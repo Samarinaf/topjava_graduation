@@ -17,9 +17,9 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = RestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class RestaurantRestController {
-    static final String REST_URL = "/restaurants";
+@RequestMapping(value = RestaurantAdminRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class RestaurantAdminRestController {
+    static final String REST_URL = "/admin/restaurants";
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
@@ -62,11 +62,5 @@ public class RestaurantRestController {
         log.info("update {} with id={}", restaurant, id);
         ValidationUtil.assureIdConsistent(restaurant, id);
         restaurantService.update(restaurant);
-    }
-
-    @GetMapping("/{id}/with-lunch-menu")
-    public Restaurant getWithLunchMenu(@PathVariable int id) {
-        log.info("get {} with dishes", id);
-        return restaurantService.getWithDishes(id);
     }
 }

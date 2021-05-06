@@ -9,7 +9,6 @@ import java.util.List;
 
 public class RestaurantTestData {
     public static final TestMatcher<Restaurant> RESTAURANT_MATCHER = TestMatcher.usingIgnoringFieldsComparator("lunchMenu");
-    public static final TestMatcher<Restaurant> RESTAURANT_WITH_LUNCH_MENU_MATCHER = TestMatcher.usingIgnoringFieldsComparator();
 
     public static final int RESTAURANT_ID = AbstractBaseEntity.START_SEQ + 2;
 
