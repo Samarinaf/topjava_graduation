@@ -1,5 +1,7 @@
 package com.topjava.graduation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -13,6 +15,7 @@ public class Restaurant extends AbstractBaseEntity {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @JsonIgnore
     private List<Dish> lunchMenu;
 
     public Restaurant() {

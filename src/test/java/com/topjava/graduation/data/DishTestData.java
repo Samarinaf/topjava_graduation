@@ -19,7 +19,7 @@ public class DishTestData {
     public static final Dish dish_1 = new Dish(DISH_ID + 1, "Tea", 1.25, LocalDate.of(2021, 4, 12), RestaurantTestData.restaurant_1);
     public static final Dish dish_2 = new Dish(DISH_ID + 2, "Oatmeal", 4.35, LocalDate.of(2021, 4, 11), RestaurantTestData.restaurant_2);
     public static final Dish dish_3 = new Dish(DISH_ID + 3, "Omelet", 4.75, LocalDate.of(2021, 4, 12), RestaurantTestData.restaurant);
-    public static final Dish dish_4 = new Dish(DISH_ID + 4, "Orange Juice", 2.45, LocalDate.of(2021, 4, 12), RestaurantTestData.restaurant_2);
+    public static final Dish dish_4 = new Dish(DISH_ID + 4, "Orange Juice", 2.45, LocalDate.of(2021, 4, 11), RestaurantTestData.restaurant_2);
     public static final Dish dish_5 = new Dish(DISH_ID + 5, "Salmon Pepper Rice", 7.15, LocalDate.of(2021, 4, 12), RestaurantTestData.restaurant_1);
     public static final Dish dish_6 = new Dish(DISH_ID + 6, "Chicken Noodle Soup", 6.75, LocalDate.of(2021, 4, 11), RestaurantTestData.restaurant_3);
     public static final Dish dish_7 = new Dish(DISH_ID + 7, "Greek Salad", 6.35, LocalDate.of(2021, 4, 11), RestaurantTestData.restaurant_3);

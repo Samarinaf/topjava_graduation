@@ -2,9 +2,11 @@ package com.topjava.graduation.service;
 
 import com.topjava.graduation.model.Dish;
 import com.topjava.graduation.repository.DishRepository;
+import com.topjava.graduation.repository.RestaurantRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.topjava.graduation.util.ValidationUtil.checkNotFoundWithId;
@@ -13,9 +15,11 @@ import static com.topjava.graduation.util.ValidationUtil.checkNotFoundWithId;
 public class DishService {
 
     private final DishRepository dishRepository;
+    private final RestaurantRepository restaurantRepository;
 
-    public DishService(DishRepository dishRepository) {
+    public DishService(DishRepository dishRepository, RestaurantRepository restaurantRepository) {
         this.dishRepository = dishRepository;
+        this.restaurantRepository = restaurantRepository;
     }
 
     public Dish get(int id) {
@@ -28,6 +32,11 @@ public class DishService {
 
     public List<Dish> getAll() {
         return dishRepository.findAll();
+    }
+
+    public List<Dish> getAllByRestaurantAndDate(int restaurantId, LocalDate date) {
+        checkNotFoundWithId(restaurantRepository.findById(restaurantId).orElse(null), restaurantId);
+        return dishRepository.findAllByRestaurantAndDate(restaurantId, date);
     }
 
     public Dish create(Dish dish) {

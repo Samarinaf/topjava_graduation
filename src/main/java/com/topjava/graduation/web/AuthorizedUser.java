@@ -4,7 +4,7 @@ import com.topjava.graduation.model.User;
 
 import java.io.Serial;
 
-public class AuthorizedUser extends org.springframework.security.core.userdetails.User{
+public class AuthorizedUser extends org.springframework.security.core.userdetails.User {
     @Serial
     private static final long serialVersionUID = 1L;
 
