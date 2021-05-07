@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RestaurantTestData {
-    public static final TestMatcher<Restaurant> RESTAURANT_MATCHER = TestMatcher.usingIgnoringFieldsComparator("lunchMenu");
+    public static final TestMatcher<Restaurant> RESTAURANT_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Restaurant.class, "lunchMenu");
 
     public static final int RESTAURANT_ID = AbstractBaseEntity.START_SEQ + 2;
 
