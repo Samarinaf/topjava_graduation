@@ -1,6 +1,7 @@
 package com.topjava.graduation.service;
 
 import com.topjava.graduation.TestMatcher;
+import com.topjava.graduation.data.UserTestData;
 import com.topjava.graduation.model.Vote;
 import com.topjava.graduation.util.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
@@ -16,12 +17,12 @@ public class VoteServiceTest extends AbstractServiceTest {
 
     @Test
     public void get() {
-        VOTE_MATCHER.assertMatch(voteService.get(VOTE_ID), vote);
+        VOTE_MATCHER.assertMatch(voteService.get(VOTE_ID, UserTestData.USER_ID), vote);
     }
 
     @Test
     public void getNotFound() {
-        assertThrows(NotFoundException.class, () -> voteService.get(TestMatcher.NOT_FOUND));
+        assertThrows(NotFoundException.class, () -> voteService.get(TestMatcher.NOT_FOUND, UserTestData.USER_ID));
     }
 
     @Test
@@ -31,44 +32,44 @@ public class VoteServiceTest extends AbstractServiceTest {
 
     @Test
     public void delete() {
-        voteService.delete(VOTE_ID);
-        assertThrows(NotFoundException.class, () -> voteService.get(VOTE_ID));
+        voteService.delete(VOTE_ID, UserTestData.USER_ID);
+        assertThrows(NotFoundException.class, () -> voteService.get(VOTE_ID, UserTestData.USER_ID));
     }
 
     @Test
     public void deleteNotFound() {
-        assertThrows(NotFoundException.class, () -> voteService.delete(TestMatcher.NOT_FOUND));
+        assertThrows(NotFoundException.class, () -> voteService.delete(TestMatcher.NOT_FOUND, UserTestData.USER_ID));
     }
 
     @Test
     public void create() {
         Vote newVote = getNew();
-        Vote created = voteService.create(newVote);
+        Vote created = voteService.create(newVote, UserTestData.ADMIN_ID);
         newVote.setId(created.id());
         VOTE_MATCHER.assertMatch(newVote, created);
-        VOTE_MATCHER.assertMatch(voteService.get(created.id()), newVote);
+        VOTE_MATCHER.assertMatch(voteService.get(created.id(), UserTestData.ADMIN_ID), newVote);
     }
 
     @Test
     public void createNull() {
-        assertThrows(IllegalArgumentException.class, () -> voteService.create(null));
+        assertThrows(IllegalArgumentException.class, () -> voteService.create(null, UserTestData.USER_ID));
     }
 
     @Test
     public void update() {
-        voteService.update(getUpdated());
-        VOTE_MATCHER.assertMatch(voteService.get(VOTE_ID), getUpdated());
+        voteService.update(getUpdated(), UserTestData.USER_ID);
+        VOTE_MATCHER.assertMatch(voteService.get(VOTE_ID, UserTestData.USER_ID), getUpdated());
     }
 
     @Test
     public void updateNull() {
-        assertThrows(IllegalArgumentException.class, () -> voteService.update(null));
+        assertThrows(IllegalArgumentException.class, () -> voteService.update(null, UserTestData.USER_ID));
     }
 
     @Test
     public void updateNotFound() {
         Vote updated = getUpdated();
         updated.setId(TestMatcher.NOT_FOUND);
-        assertThrows(NotFoundException.class, () -> voteService.update(updated));
+        assertThrows(NotFoundException.class, () -> voteService.update(updated, UserTestData.USER_ID));
     }
 }

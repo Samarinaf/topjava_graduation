@@ -17,14 +17,22 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM Vote v WHERE v.id=:id")
-    int delete(@Param("id") int id);
+    @Query("DELETE FROM Vote v WHERE v.id=:id AND v.user.id=:userId")
+    int delete(@Param("id") int id, @Param("userId") int userId);
 
     @EntityGraph(attributePaths = {"user", "restaurant", "user.roles"})
     Optional<Vote> findById(int id);
 
     @EntityGraph(attributePaths = {"user", "restaurant", "user.roles"})
+    @Query("SELECT v FROM Vote v WHERE v.id=:id AND v.user.id=:userId")
+    Optional<Vote> findByIdAndUser(@Param("id") int id, @Param("userId") int userId);
+
+    @EntityGraph(attributePaths = {"user", "restaurant", "user.roles"})
     List<Vote> findAll();
+
+    @EntityGraph(attributePaths = {"user", "restaurant", "user.roles"})
+    @Query("SELECT v FROM Vote v WHERE v.user.id=:userId")
+    List<Vote> findAllByUser(@Param("userId") int userId);
 
     @Query("SELECT v FROM Vote v WHERE v.date=:date")
     @EntityGraph(attributePaths = {"user", "restaurant", "user.roles"})
