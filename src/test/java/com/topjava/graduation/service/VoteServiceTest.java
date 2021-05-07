@@ -7,6 +7,9 @@ import com.topjava.graduation.util.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+
 import static com.topjava.graduation.data.VoteTestData.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -21,6 +24,11 @@ public class VoteServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    public void getNotOwn() {
+        assertThrows(NotFoundException.class, () -> voteService.get(VOTE_ID, UserTestData.ADMIN_ID));
+    }
+
+    @Test
     public void getNotFound() {
         assertThrows(NotFoundException.class, () -> voteService.get(TestMatcher.NOT_FOUND, UserTestData.USER_ID));
     }
@@ -31,9 +39,24 @@ public class VoteServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    public void getAllByUser() {
+        VOTE_MATCHER.assertMatch(voteService.getAllByUser(UserTestData.USER_ID), Arrays.asList(vote, vote_1));
+    }
+
+    @Test
+    public void getAllByDate() {
+        VOTE_MATCHER.assertMatch(voteService.getAllByDate(LocalDate.of(2021, 4, 11)), Arrays.asList(vote, vote_2));
+    }
+
+    @Test
     public void delete() {
         voteService.delete(VOTE_ID, UserTestData.USER_ID);
         assertThrows(NotFoundException.class, () -> voteService.get(VOTE_ID, UserTestData.USER_ID));
+    }
+
+    @Test
+    public void deleteNotOwn() {
+        assertThrows(NotFoundException.class, () -> voteService.delete(VOTE_ID, UserTestData.ADMIN_ID));
     }
 
     @Test
@@ -59,6 +82,11 @@ public class VoteServiceTest extends AbstractServiceTest {
     public void update() {
         voteService.update(getUpdated(), UserTestData.USER_ID);
         VOTE_MATCHER.assertMatch(voteService.get(VOTE_ID, UserTestData.USER_ID), getUpdated());
+    }
+
+    @Test
+    public void updateNotOwn() {
+        assertThrows(IllegalArgumentException.class, () -> voteService.update(vote, UserTestData.ADMIN_ID));
     }
 
     @Test
