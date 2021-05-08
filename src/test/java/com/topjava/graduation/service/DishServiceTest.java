@@ -1,12 +1,12 @@
 package com.topjava.graduation.service;
 
-import com.topjava.graduation.TestMatcher;
 import com.topjava.graduation.data.RestaurantTestData;
 import com.topjava.graduation.model.Dish;
 import com.topjava.graduation.util.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.topjava.graduation.TestUtil.*;
 import static com.topjava.graduation.data.DishTestData.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -16,33 +16,33 @@ public class DishServiceTest extends AbstractServiceTest {
     private DishService dishService;
 
     @Test
-    public void get() {
+    void get() {
         DISH_MATCHER.assertMatch(dishService.get(DISH_ID), dish);
     }
 
     @Test
-    public void getNotFound() {
-        assertThrows(NotFoundException.class, () -> dishService.get(TestMatcher.NOT_FOUND)); //id = 1
+    void getNotFound() {
+        assertThrows(NotFoundException.class, () -> dishService.get(NOT_FOUND));
     }
 
     @Test
-    public void getAll() {
+    void getAll() {
         DISH_MATCHER.assertMatch(dishService.getAll(), allDishes());
     }
 
     @Test
-    public void delete() {
+    void delete() {
         dishService.delete(DISH_ID);
         assertThrows(NotFoundException.class, () -> dishService.get(DISH_ID));
     }
 
     @Test
-    public void deleteNotFound() {
-        assertThrows(NotFoundException.class, () -> dishService.delete(TestMatcher.NOT_FOUND));
+    void deleteNotFound() {
+        assertThrows(NotFoundException.class, () -> dishService.delete(NOT_FOUND));
     }
 
     @Test
-    public void create() {
+    void create() {
         Dish newDish = getNew();
         newDish.setRestaurant(RestaurantTestData.restaurant);
         Dish created = dishService.create(newDish);
@@ -52,12 +52,12 @@ public class DishServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void createNull() {
+    void createNull() {
         assertThrows(IllegalArgumentException.class, () -> dishService.create(null));
     }
 
     @Test
-    public void update() {
+    void update() {
         Dish updated = getUpdated();
         updated.setRestaurant(RestaurantTestData.restaurant);
         dishService.update(updated);
@@ -65,14 +65,14 @@ public class DishServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void updateNull() {
+    void updateNull() {
         assertThrows(IllegalArgumentException.class, () -> dishService.update(null));
     }
 
     @Test
-    public void updateNotFound() {
+    void updateNotFound() {
         Dish updated = getUpdated();
-        updated.setId(TestMatcher.NOT_FOUND);
+        updated.setId(NOT_FOUND);
         assertThrows(NotFoundException.class, () -> dishService.update(updated));
     }
 }

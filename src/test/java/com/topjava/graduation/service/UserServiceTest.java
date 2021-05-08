@@ -1,6 +1,5 @@
 package com.topjava.graduation.service;
 
-import com.topjava.graduation.TestMatcher;
 import com.topjava.graduation.model.User;
 import com.topjava.graduation.util.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
@@ -9,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 
 import java.util.Arrays;
 
+import static com.topjava.graduation.TestUtil.*;
 import static com.topjava.graduation.data.UserTestData.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -18,38 +18,38 @@ public class UserServiceTest extends AbstractServiceTest {
     private UserService userService;
 
     @Test
-    public void get() {
+    void get() {
         USER_MATCHER.assertMatch(userService.get(USER_ID), user);
     }
 
     @Test
-    public void getNotFound() {
-        assertThrows(NotFoundException.class, () -> userService.get(TestMatcher.NOT_FOUND)); //id = 1
+    void getNotFound() {
+        assertThrows(NotFoundException.class, () -> userService.get(NOT_FOUND));
     }
 
     @Test
-    public void getByEmail() {
+    void getByEmail() {
         USER_MATCHER.assertMatch(userService.getByEmail("admin@gmail.com"), admin);
     }
 
     @Test
-    public void getAll() {
+    void getAll() {
         USER_MATCHER.assertMatch(userService.getAll(), Arrays.asList(user, admin));
     }
 
     @Test
-    public void delete() {
+    void delete() {
         userService.delete(USER_ID);
         assertThrows(NotFoundException.class, () -> userService.get(USER_ID));
     }
 
     @Test
-    public void deleteNotFound() {
-        assertThrows(NotFoundException.class, () -> userService.delete(TestMatcher.NOT_FOUND));
+    void deleteNotFound() {
+        assertThrows(NotFoundException.class, () -> userService.delete(NOT_FOUND));
     }
 
     @Test
-    public void create() {
+    void create() {
         User created = userService.create(getNew());
         User newUser = getNew();
         newUser.setId(created.id());
@@ -58,30 +58,30 @@ public class UserServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void createWithDuplicateEmail() {
+    void createWithDuplicateEmail() {
         assertThrows(DataAccessException.class, () -> userService.create(getNewWithDuplicateEmail()));
     }
 
     @Test
-    public void createNull() {
+    void createNull() {
         assertThrows(IllegalArgumentException.class, () -> userService.create(null));
     }
 
     @Test
-    public void update() {
-        userService.update(getUpdated()); //user
+    void update() {
+        userService.update(getUpdated());
         USER_MATCHER.assertMatch(userService.get(USER_ID), getUpdated());
     }
 
     @Test
-    public void updateNull() {
+    void updateNull() {
         assertThrows(IllegalArgumentException.class, () -> userService.update(null));
     }
 
     @Test
-    public void updateNotFound() {
+    void updateNotFound() {
         User updated = getUpdated();
-        updated.setId(TestMatcher.NOT_FOUND);
+        updated.setId(NOT_FOUND);
         assertThrows(NotFoundException.class, () -> userService.update(updated));
     }
 }

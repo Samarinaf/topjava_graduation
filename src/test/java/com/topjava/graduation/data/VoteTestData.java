@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class VoteTestData {
-    public static final TestMatcher<Vote> VOTE_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Vote.class, "restaurant.lunchMenu");
+    public static final TestMatcher<Vote> VOTE_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Vote.class, "restaurant.lunchMenu", "user.password");
 
     public static final int VOTE_ID = AbstractBaseEntity.START_SEQ + 16;
 

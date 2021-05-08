@@ -4,6 +4,7 @@ import com.topjava.graduation.TestMatcher;
 import com.topjava.graduation.model.AbstractBaseEntity;
 import com.topjava.graduation.model.Role;
 import com.topjava.graduation.model.User;
+import com.topjava.graduation.web.json.JsonUtil;
 
 import java.util.Collections;
 
@@ -24,13 +25,21 @@ public class UserTestData {
         return new User(null, "Duplicate", "user@yandex.ru", "duplicatePassword", Role.USER);
     }
 
+    public static User getInvalid() {
+        return new User(USER_ID, "   ", "ddsvbdbvdhjvb", "pass", Role.USER);
+    }
+
     public static User getUpdated() {
         User updated = new User(user);
         updated.setEmail("update@gmail.com");
         updated.setName("UpdatedName");
-        updated.setPassword("newPass");
+        updated.setPassword("updatedPassword");
         updated.setEnabled(false);
         updated.setRoles(Collections.singleton(Role.ADMIN));
         return updated;
+    }
+
+    public static String jsonWithPassword(User user, String password) {
+        return JsonUtil.writeAdditionProps(user, "password", password);
     }
 }

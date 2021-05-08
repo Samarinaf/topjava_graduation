@@ -8,7 +8,6 @@ import static com.topjava.graduation.TestUtil.readListFromJsonMvcResult;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestMatcher<T> {
-    public static final int NOT_FOUND = 1;
     private final String[] fieldsToIgnore;
     private final Class<T> clazz;
 
