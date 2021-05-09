@@ -1,6 +1,5 @@
 package com.topjava.graduation.web.controller.dish;
 
-import com.topjava.graduation.data.UserTestData;
 import com.topjava.graduation.model.Dish;
 import com.topjava.graduation.web.controller.AbstractControllerTest;
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +11,7 @@ import static com.topjava.graduation.TestUtil.*;
 import static com.topjava.graduation.data.DishTestData.DISH_MATCHER;
 import static com.topjava.graduation.data.DishTestData.getAllByBlueRestaurant;
 import static com.topjava.graduation.data.RestaurantTestData.RESTAURANT_ID;
+import static com.topjava.graduation.data.UserTestData.user;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,7 +23,7 @@ public class DishRestControllerTest extends AbstractControllerTest {
     void getLunchMenuByDate() throws Exception {
         perform(MockMvcRequestBuilders.get(REST_URL + RESTAURANT_ID)
                 .param("date", "2021-04-12")
-                .with(userHttpBasic(UserTestData.user)))
+                .with(userHttpBasic(user)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -33,7 +33,7 @@ public class DishRestControllerTest extends AbstractControllerTest {
     @Test
     void getByNullDate() throws Exception {
         perform(MockMvcRequestBuilders.get(REST_URL + RESTAURANT_ID)
-                .with(userHttpBasic(UserTestData.user)))
+                .with(userHttpBasic(user)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -50,7 +50,7 @@ public class DishRestControllerTest extends AbstractControllerTest {
     @Test
     void getByNotFoundRestaurant() throws Exception {
         perform(MockMvcRequestBuilders.get(REST_URL + NOT_FOUND)
-                .with(userHttpBasic(UserTestData.user)))
+                .with(userHttpBasic(user)))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
     }

@@ -127,10 +127,12 @@ public class AdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     void updateInvalid() throws Exception {
+        User invalid = getInvalid();
+        invalid.setId(USER_ID);
         perform(MockMvcRequestBuilders.put(REST_URL + USER_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin))
-                .content(jsonWithPassword(getInvalid(), "pass")))
+                .content(jsonWithPassword(invalid, "pass")))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
     }
@@ -151,6 +153,15 @@ public class AdminRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    void createUnauthorized() throws Exception {
+        perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonWithPassword(getNew(), "newPassword")))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
     @Transactional(propagation = Propagation.NEVER)
     void createDuplicatedEmail() throws Exception {
         perform(MockMvcRequestBuilders.post(REST_URL)
@@ -163,12 +174,10 @@ public class AdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     void createInvalid() throws Exception {
-        User invalid = getInvalid();
-        invalid.setId(null);
         perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin))
-                .content(jsonWithPassword(invalid, "pass")))
+                .content(jsonWithPassword(getInvalid(), "pass")))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
     }

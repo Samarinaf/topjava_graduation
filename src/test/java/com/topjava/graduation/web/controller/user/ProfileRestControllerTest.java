@@ -3,7 +3,6 @@ package com.topjava.graduation.web.controller.user;
 import com.topjava.graduation.model.User;
 import com.topjava.graduation.service.UserService;
 import com.topjava.graduation.web.controller.AbstractControllerTest;
-import com.topjava.graduation.web.json.JsonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -73,7 +72,7 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
     void updateUnauthorized() throws Exception {
         perform(MockMvcRequestBuilders.put(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(getUpdated())))
+                .content(jsonWithPassword(getUpdated(), "updatedPassword")))
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
     }
@@ -83,7 +82,7 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.put(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(user))
-                .content(JsonUtil.writeValue(getInvalid())))
+                .content(jsonWithPassword(getInvalid(), "pass")))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
     }
@@ -96,7 +95,7 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.put(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(user))
-                .content(JsonUtil.writeValue(duplicate)))
+                .content(jsonWithPassword(duplicate, "duplicatePassword")))
                 .andDo(print())
                 .andExpect(status().isConflict());
     }

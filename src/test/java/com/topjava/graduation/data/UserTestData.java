@@ -22,11 +22,11 @@ public class UserTestData {
     }
 
     public static User getNewWithDuplicateEmail() {
-        return new User(null, "Duplicate", "user@yandex.ru", "duplicatePassword", Role.USER);
+        return new User(null, "Duplicate", "admin@gmail.com", "duplicatePassword", Role.USER);
     }
 
     public static User getInvalid() {
-        return new User(USER_ID, "   ", "ddsvbdbvdhjvb", "pass", Role.USER);
+        return new User(null, "   ", "ddsvbdbvdhjvb", "pass", Role.USER);
     }
 
     public static User getUpdated() {
