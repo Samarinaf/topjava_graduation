@@ -26,7 +26,15 @@ public class VoteTestData {
         return new Vote(VOTE_ID, LocalDate.now(), UserTestData.user, RestaurantTestData.restaurant_3);
     }
 
+    public static Vote getInvalid() {
+        return new Vote(null, null, null);
+    }
+
     public static List<Vote> allVotes() {
         return Arrays.asList(vote, vote_1, vote_2, vote_3);
+    }
+
+    public static List<Vote> getAllByUser() {
+        return Arrays.asList(vote, vote_1);
     }
 }

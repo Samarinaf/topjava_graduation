@@ -2,6 +2,7 @@ package com.topjava.graduation.web;
 
 import com.topjava.graduation.util.exception.ErrorInfo;
 import com.topjava.graduation.util.exception.NotFoundException;
+import com.topjava.graduation.util.exception.TimeExpiredException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -25,6 +26,12 @@ public class ExceptionInfoHandler {
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)  //422
     @ExceptionHandler(NotFoundException.class)
     public ErrorInfo handleError(HttpServletRequest req, NotFoundException e) {
+        return logAndGetErrorInfo(req, e);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)  //406
+    @ExceptionHandler(TimeExpiredException.class)
+    public ErrorInfo handleError(HttpServletRequest req, TimeExpiredException e) {
         return logAndGetErrorInfo(req, e);
     }
 
