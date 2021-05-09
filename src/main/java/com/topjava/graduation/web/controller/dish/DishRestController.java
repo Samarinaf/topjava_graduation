@@ -25,8 +25,8 @@ public class DishRestController {
     public List<Dish> getLunchMenuByDate(@PathVariable int restaurantId,
                                          @RequestParam(value = "date", required = false)
                                          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        log.info("get all dishes by restaurant id={} and date={}", restaurantId, date);
         LocalDate required = date == null ? LocalDate.now() : date;
+        log.info("get all dishes by restaurant id={} and date={}", restaurantId, required);
         return dishService.getAllByRestaurantAndDate(restaurantId, required);
     }
 }

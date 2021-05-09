@@ -31,8 +31,10 @@ public class VoteAdminRestController {
     }
 
     @GetMapping("/by")
-    public List<Vote> getAllByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        log.info("get all votes by date={}", date);
-        return voteService.getAllByDate(date);
+    public List<Vote> getAllByDate(@RequestParam(value = "date", required = false)
+                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        LocalDate required = date == null ? LocalDate.now() : date;
+        log.info("get all votes by date={}", required);
+        return voteService.getAllByDate(required);
     }
 }
