@@ -25,6 +25,10 @@ public class RestaurantTestData {
         return new Restaurant(RESTAURANT_ID, "UpdatedRestaurant");
     }
 
+    public static Restaurant getInvalid() {
+        return new Restaurant(null, "      ");
+    }
+
     public static List<Restaurant> allRestaurants() {
         return Arrays.asList(restaurant, restaurant_1, restaurant_2, restaurant_3);
     }
