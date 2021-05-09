@@ -40,7 +40,7 @@ public class RestaurantAdminRestController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
-        log.info("delete restaurant with id={}", id);
+        log.info("delete restaurant by id={}", id);
         restaurantService.delete(id);
     }
 
@@ -59,7 +59,7 @@ public class RestaurantAdminRestController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody Restaurant restaurant, @PathVariable int id) {
-        log.info("update {} with id={}", restaurant, id);
+        log.info("update {} by id={}", restaurant, id);
         ValidationUtil.assureIdConsistent(restaurant, id);
         restaurantService.update(restaurant);
     }

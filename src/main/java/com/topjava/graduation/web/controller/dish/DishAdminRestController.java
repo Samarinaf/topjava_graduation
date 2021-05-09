@@ -40,7 +40,7 @@ public class DishAdminRestController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
-        log.info("delete dish with id={}", id);
+        log.info("delete dish by id={}", id);
         dishService.delete(id);
     }
 
@@ -59,7 +59,7 @@ public class DishAdminRestController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody Dish dish, @PathVariable int id) {
-        log.info("update {} with id={}", dish, id);
+        log.info("update {} by id={}", dish, id);
         ValidationUtil.assureIdConsistent(dish, id);
         dishService.update(dish);
     }

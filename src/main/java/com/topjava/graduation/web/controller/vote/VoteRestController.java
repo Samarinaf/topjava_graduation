@@ -29,7 +29,7 @@ public class VoteRestController {
 
     @GetMapping("/{id}")
     public Vote get(@PathVariable int id) {
-        log.info("get vote with id={} for user with id={}", id, authUserId());
+        log.info("get vote by id={} for user with id={}", id, authUserId());
         return voteService.get(id, authUserId());
     }
 
@@ -42,7 +42,7 @@ public class VoteRestController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
-        log.info("delete vote with id={} for user with id={}", id, authUserId());
+        log.info("delete vote by id={} for user with id={}", id, authUserId());
         voteService.delete(id, authUserId());
     }
 
@@ -61,7 +61,7 @@ public class VoteRestController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody Vote vote, @PathVariable int id) {
-        log.info("update {} with id={} for user with id={}", vote, id, authUserId());
+        log.info("update {} by id={} for user with id={}", vote, id, authUserId());
         ValidationUtil.assureIdConsistent(vote, id);
         //TimeExpiredException is thrown if try to update after 11 a.m.
         ValidationUtil.checkTimeIsAvailable();

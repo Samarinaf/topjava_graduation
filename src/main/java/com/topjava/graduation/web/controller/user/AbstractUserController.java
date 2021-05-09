@@ -32,12 +32,12 @@ public class AbstractUserController {
     }
 
     public void delete(int id) {
-        log.info("delete user with id={}", id);
+        log.info("delete user by id={}", id);
         userService.delete(id);
     }
 
     public void update(User user, int id) {
-        log.info("update {} with id={}", user, id);
+        log.info("update {} by id={}", user, id);
         ValidationUtil.assureIdConsistent(user, id);
         userService.update(user);
     }

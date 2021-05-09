@@ -27,7 +27,7 @@ public class VoteTestData {
     }
 
     public static Vote getInvalid() {
-        return new Vote(null, null, null);
+        return new Vote(null, null, null, null);
     }
 
     public static List<Vote> allVotes() {
