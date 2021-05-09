@@ -63,7 +63,7 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.put(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(user))
-                .content(JsonUtil.writeValue(getUpdated())))
+                .content(jsonWithPassword(getUpdated(), "updatedPassword")))
                 .andDo(print())
                 .andExpect(status().isNoContent());
         USER_MATCHER.assertMatch(userService.get(USER_ID), getUpdated());
