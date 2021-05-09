@@ -39,4 +39,10 @@ public class DishTestData {
                 .sorted(Comparator.comparing(Dish::getName).thenComparing(Dish::getPrice))
                 .collect(Collectors.toList());
     }
+
+    public static List<Dish> getAllByBlueRestaurant() {
+        return Stream.of(dish, dish_3, dish_8)
+                .sorted(Comparator.comparing(Dish::getName).thenComparing(Dish::getPrice))
+                .collect(Collectors.toList());
+    }
 }
