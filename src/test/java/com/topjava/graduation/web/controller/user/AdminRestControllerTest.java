@@ -144,6 +144,7 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin))
                 .content(jsonWithPassword(newUser, "newPassword")))
+                .andDo(print())
                 .andExpect(status().isCreated());
 
         User created = readFromJson(action, User.class);

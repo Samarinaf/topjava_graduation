@@ -102,7 +102,7 @@ public class VoteRestControllerTest extends AbstractControllerTest {
         Vote newVote = getNew();
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .with(userHttpBasic(admin))
+                .with(userHttpBasic(user))
                 .content(JsonUtil.writeValue(newVote)))
                 .andDo(print())
                 .andExpect(status().isCreated());
@@ -110,7 +110,7 @@ public class VoteRestControllerTest extends AbstractControllerTest {
         Vote created = readFromJson(action, Vote.class);
         newVote.setId(created.id());
         VOTE_MATCHER.assertMatch(created, newVote);
-        VOTE_MATCHER.assertMatch(voteService.get(created.id(), UserTestData.ADMIN_ID), newVote);
+        VOTE_MATCHER.assertMatch(voteService.get(created.id(), UserTestData.USER_ID), newVote);
     }
 
     @Test

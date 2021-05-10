@@ -19,7 +19,7 @@ public class VoteTestData {
     public static final Vote vote_3 = new Vote(VOTE_ID + 3, LocalDate.of(2021, 4, 12), UserTestData.admin, RestaurantTestData.restaurant_2);
 
     public static Vote getNew() {
-        return new Vote(null, LocalDate.now(), UserTestData.admin, RestaurantTestData.restaurant);
+        return new Vote(null, LocalDate.now(), UserTestData.user, RestaurantTestData.restaurant_1);
     }
 
     public static Vote getUpdated() {

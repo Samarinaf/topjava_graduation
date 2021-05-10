@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-import static com.topjava.graduation.TestUtil.*;
+import static com.topjava.graduation.TestUtil.NOT_FOUND;
 import static com.topjava.graduation.data.VoteTestData.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -67,10 +67,10 @@ public class VoteServiceTest extends AbstractServiceTest {
     @Test
     void create() {
         Vote newVote = getNew();
-        Vote created = voteService.create(newVote, UserTestData.ADMIN_ID);
+        Vote created = voteService.create(newVote, UserTestData.USER_ID);
         newVote.setId(created.id());
         VOTE_MATCHER.assertMatch(newVote, created);
-        VOTE_MATCHER.assertMatch(voteService.get(created.id(), UserTestData.ADMIN_ID), newVote);
+        VOTE_MATCHER.assertMatch(voteService.get(created.id(), UserTestData.USER_ID), newVote);
     }
 
     @Test
