@@ -24,8 +24,8 @@ public class ExceptionInfoHandler {
     private static final Logger log = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)  //422
-    @ExceptionHandler(NotFoundException.class)
-    public ErrorInfo handleError(HttpServletRequest req, NotFoundException e) {
+    @ExceptionHandler({NotFoundException.class, IllegalArgumentException.class})
+    public ErrorInfo handleErrors(HttpServletRequest req, Exception e) {
         return logAndGetErrorInfo(req, e);
     }
 
