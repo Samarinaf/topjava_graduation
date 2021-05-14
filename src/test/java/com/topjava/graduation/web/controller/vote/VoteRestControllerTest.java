@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalTime;
 
@@ -126,6 +128,7 @@ public class VoteRestControllerTest extends AbstractControllerTest {
     //If update vote after 11 a.m. -> TimeExpiredException is thrown
 
     @Test
+    @Transactional(propagation = Propagation.NEVER)
     void update() throws Exception {
         if (LocalTime.now().isBefore(LocalTime.of(11, 0))) {
             perform(MockMvcRequestBuilders.put(REST_URL + VOTE_ID)
