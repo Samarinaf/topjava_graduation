@@ -1,10 +1,9 @@
 package com.topjava.graduation.service;
 
 import com.topjava.graduation.model.Vote;
-import com.topjava.graduation.repository.UserRepository;
 import com.topjava.graduation.repository.VoteRepository;
-import com.topjava.graduation.util.exception.NotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
@@ -16,15 +15,13 @@ import static com.topjava.graduation.util.ValidationUtil.checkNotFoundWithId;
 public class VoteService {
 
     private final VoteRepository voteRepository;
-    private final UserRepository userRepository;
 
-    public VoteService(VoteRepository voteRepository, UserRepository userRepository) {
+    public VoteService(VoteRepository voteRepository) {
         this.voteRepository = voteRepository;
-        this.userRepository = userRepository;
     }
 
     public Vote get(int id, int userId) {
-        return checkNotFoundWithId(voteRepository.findByIdAndUser(id, userId).orElse(null), id);
+        return checkNotFoundWithId(voteRepository.findByIdAndUser(id, userId), id);
     }
 
     public void delete(int id, int userId) {
@@ -46,14 +43,13 @@ public class VoteService {
     public Vote create(Vote vote, int userId) {
         Assert.notNull(vote, "vote must not be null");
         if (vote.getUser() != null && vote.getUser().id() != userId) return null;
-        vote.setUser(userRepository.findById(userId).orElseThrow(
-                () -> new NotFoundException("User with id=" + userId + " not found")));
         return voteRepository.save(vote);
     }
 
+    @Transactional
     public void update(Vote vote, int userId) {
         Assert.notNull(vote, "vote must not be null");
-        checkNotFoundWithId(voteRepository.findById(vote.id()).orElse(null), vote.id());
+        checkNotFoundWithId(voteRepository.findById(vote.id()), vote.id());
         if (vote.getUser() == null || vote.getUser().id() != userId) {
             throw new IllegalArgumentException("Vote doesn't belong to user with id=" + userId);
         }

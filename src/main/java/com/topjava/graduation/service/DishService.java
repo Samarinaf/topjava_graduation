@@ -4,6 +4,7 @@ import com.topjava.graduation.model.Dish;
 import com.topjava.graduation.repository.DishRepository;
 import com.topjava.graduation.repository.RestaurantRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class DishService {
     }
 
     public Dish get(int id) {
-        return checkNotFoundWithId(dishRepository.findById(id).orElse(null), id);
+        return checkNotFoundWithId(dishRepository.findById(id), id);
     }
 
     public void delete(int id) {
@@ -34,8 +35,9 @@ public class DishService {
         return dishRepository.findAll();
     }
 
+    @Transactional
     public List<Dish> getAllByRestaurantAndDate(int restaurantId, LocalDate date) {
-        checkNotFoundWithId(restaurantRepository.findById(restaurantId).orElse(null), restaurantId);
+        checkNotFoundWithId(restaurantRepository.findById(restaurantId), restaurantId);
         return dishRepository.findAllByRestaurantAndDate(restaurantId, date);
     }
 
@@ -44,9 +46,10 @@ public class DishService {
         return dishRepository.save(dish);
     }
 
+    @Transactional
     public void update(Dish dish) {
         Assert.notNull(dish, "dish must not be null");
-        checkNotFoundWithId(dishRepository.findById(dish.id()).orElse(null), dish.id());
+        checkNotFoundWithId(dishRepository.findById(dish.id()), dish.id());
         dishRepository.save(dish);
     }
 }

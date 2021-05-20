@@ -23,7 +23,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User get(int id) {
-        return checkNotFoundWithId(userRepository.findById(id).orElse(null), id);
+        return checkNotFoundWithId(userRepository.findById(id), id);
     }
 
     public void delete(int id) {
@@ -41,7 +41,7 @@ public class UserService implements UserDetailsService {
 
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
-        checkNotFoundWithId(userRepository.findById(user.id()).orElse(null), user.id());
+        checkNotFoundWithId(userRepository.findById(user.id()), user.id());
         userRepository.save(user);
     }
 

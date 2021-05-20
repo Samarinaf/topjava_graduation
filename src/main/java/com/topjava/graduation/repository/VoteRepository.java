@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface VoteRepository extends JpaRepository<Vote, Integer> {
@@ -21,11 +20,11 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
     int delete(@Param("id") int id, @Param("userId") int userId);
 
     @EntityGraph(attributePaths = {"user", "restaurant", "user.roles"})
-    Optional<Vote> findById(int id);
+    Vote findById(int id);
 
     @EntityGraph(attributePaths = {"user", "restaurant", "user.roles"})
     @Query("SELECT v FROM Vote v WHERE v.id=:id AND v.user.id=:userId")
-    Optional<Vote> findByIdAndUser(@Param("id") int id, @Param("userId") int userId);
+    Vote findByIdAndUser(@Param("id") int id, @Param("userId") int userId);
 
     @EntityGraph(attributePaths = {"user", "restaurant", "user.roles"})
     List<Vote> findAll();
