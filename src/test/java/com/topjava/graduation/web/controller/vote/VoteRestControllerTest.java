@@ -74,29 +74,42 @@ public class VoteRestControllerTest extends AbstractControllerTest {
                 .andExpect(VOTE_MATCHER.contentJson(getAllByUser()));
     }
 
+    //TimeExpiredException is thrown if try to delete after 11 a.m.
+
     @Test
     void delete() throws Exception {
-        perform(MockMvcRequestBuilders.delete(REST_URL + VOTE_ID)
-                .with(userHttpBasic(user)))
-                .andDo(print())
-                .andExpect(status().isNoContent());
-        assertThrows(NotFoundException.class, () -> voteService.get(VOTE_ID, UserTestData.USER_ID));
+        if (LocalTime.now().isBefore(LocalTime.of(11, 0))) {
+            perform(MockMvcRequestBuilders.delete(REST_URL + VOTE_ID)
+                    .with(userHttpBasic(user)))
+                    .andDo(print())
+                    .andExpect(status().isNoContent());
+            assertThrows(NotFoundException.class, () -> voteService.get(VOTE_ID, UserTestData.USER_ID));
+        } else {
+            perform(MockMvcRequestBuilders.delete(REST_URL + VOTE_ID)
+                    .with(userHttpBasic(user)))
+                    .andDo(print())
+                    .andExpect(status().isNotAcceptable());
+        }
     }
 
     @Test
     void deleteNotFound() throws Exception {
-        perform(MockMvcRequestBuilders.delete(REST_URL + NOT_FOUND)
-                .with(userHttpBasic(user)))
-                .andDo(print())
-                .andExpect(status().isUnprocessableEntity());
+        if (LocalTime.now().isBefore(LocalTime.of(11, 0))) {
+            perform(MockMvcRequestBuilders.delete(REST_URL + NOT_FOUND)
+                    .with(userHttpBasic(user)))
+                    .andDo(print())
+                    .andExpect(status().isUnprocessableEntity());
+        }
     }
 
     @Test
     void deleteNotOwn() throws Exception {
-        perform(MockMvcRequestBuilders.delete(REST_URL + VOTE_ID)
-                .with(userHttpBasic(admin)))
-                .andDo(print())
-                .andExpect(status().isUnprocessableEntity());
+        if (LocalTime.now().isBefore(LocalTime.of(11, 0))) {
+            perform(MockMvcRequestBuilders.delete(REST_URL + VOTE_ID)
+                    .with(userHttpBasic(admin)))
+                    .andDo(print())
+                    .andExpect(status().isUnprocessableEntity());
+        }
     }
 
     @Test
@@ -125,7 +138,7 @@ public class VoteRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isUnprocessableEntity());
     }
 
-    //If update vote after 11 a.m. -> TimeExpiredException is thrown
+    //TimeExpiredException is thrown if try to update after 11 a.m.
 
     @Test
     @Transactional(propagation = Propagation.NEVER)

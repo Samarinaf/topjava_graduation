@@ -43,6 +43,8 @@ public class VoteRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         log.info("delete vote by id={} for user with id={}", id, authUserId());
+        //TimeExpiredException is thrown if try to delete after 11 a.m.
+        ValidationUtil.checkTimeIsAvailable();
         voteService.delete(id, authUserId());
     }
 
