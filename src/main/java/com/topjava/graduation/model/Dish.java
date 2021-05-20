@@ -18,7 +18,7 @@ public class Dish extends AbstractBaseEntity {
 
     @Column(name = "price", nullable = false)
     @NotNull
-    private Double price;
+    private Integer price;
 
     @Column(name = "dish_date", nullable = false)
     @NotNull
@@ -33,7 +33,7 @@ public class Dish extends AbstractBaseEntity {
     public Dish() {
     }
 
-    public Dish(Integer id, String name, Double price, LocalDate date, Restaurant restaurant) {
+    public Dish(Integer id, String name, Integer price, LocalDate date, Restaurant restaurant) {
         super(id);
         this.name = name;
         this.price = price;
@@ -49,11 +49,11 @@ public class Dish extends AbstractBaseEntity {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

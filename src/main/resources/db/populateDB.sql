@@ -21,16 +21,16 @@ VALUES ('BlueRestaurant'),   --1002
        ('YellowRestaurant'); --1005
 
 INSERT INTO dishes (name, price, dish_date, restaurant_id)
-VALUES ('Coffee', 2.95, '2021-04-12', 1002),                           --1006
-       ('Tea', 1.25, '2021-04-12', 1003),                              --1007
-       ('Oatmeal', 4.35, '2021-04-11', 1004),                          --1008
-       ('Omelet', 4.75, '2021-04-12', 1002),                           --1009
-       ('Orange Juice', 2.45, '2021-04-11', 1004),                     --1010
-       ('Salmon Pepper Rice', 7.15, '2021-04-12', 1003),               --1011
-       ('Chicken Noodle Soup', 6.75, '2021-04-11', 1005),              --1012
-       ('Greek Salad', 6.35, '2021-04-11', 1005),                      --1013
-       ('Cheese Tomato & Red Onion Panini', 5.95, '2021-04-12', 1002), --1014
-       ('Roast Ham & Pickle Sandwich', 5.45, '2021-04-11', 1004);      --1015
+VALUES ('Coffee', 295, '2021-04-12', 1002),                           --1006
+       ('Tea', 125, '2021-04-12', 1003),                              --1007
+       ('Oatmeal', 435, '2021-04-11', 1004),                          --1008
+       ('Omelet', 475, '2021-04-12', 1002),                           --1009
+       ('Orange Juice', 248, '2021-04-11', 1004),                     --1010
+       ('Salmon Pepper Rice', 715, '2021-04-12', 1003),               --1011
+       ('Chicken Noodle Soup', 674, '2021-04-11', 1005),              --1012
+       ('Greek Salad', 635, '2021-04-11', 1005),                      --1013
+       ('Cheese Tomato & Red Onion Panini', 595, '2021-04-12', 1002), --1014
+       ('Roast Ham & Pickle Sandwich', 543, '2021-04-11', 1004);      --1015
 
 INSERT INTO votes (vote_date, user_id, restaurant_id)
 VALUES ('2021-04-11', 1000, 1002), --1016 / user
