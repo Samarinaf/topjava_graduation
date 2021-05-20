@@ -24,12 +24,6 @@ public class VoteAdminRestController {
     @Autowired
     private VoteService voteService;
 
-    @GetMapping
-    public List<Vote> getAll() {
-        log.info("get all votes");
-        return voteService.getAll();
-    }
-
     @GetMapping("/by")
     public List<Vote> getAllByDate(@RequestParam(value = "date", required = false)
                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {

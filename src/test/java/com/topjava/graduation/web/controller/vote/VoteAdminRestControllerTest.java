@@ -20,31 +20,6 @@ public class VoteAdminRestControllerTest extends AbstractControllerTest {
     private static final String REST_URL = VoteAdminRestController.REST_URL + '/';
 
     @Test
-    void getAll() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL)
-                .with(userHttpBasic(admin)))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(VOTE_MATCHER.contentJson(allVotes()));
-    }
-
-    @Test
-    void getAllUnauthorized() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL))
-                .andDo(print())
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void getAllForbidden() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL)
-                .with(userHttpBasic(user)))
-                .andDo(print())
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
     void getAllByDate() throws Exception {
         perform(MockMvcRequestBuilders.get(REST_URL + "by")
                 .param("date", "2021-04-11")
