@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Table(name = "votes")
 public class Vote extends AbstractBaseEntity {
 
-    @Column(name = "date")
+    @Column(name = "vote_date")
     @NotNull
     private LocalDate date;
 

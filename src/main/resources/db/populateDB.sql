@@ -20,7 +20,7 @@ VALUES ('BlueRestaurant'),   --1002
        ('BlackRestaurant'),  --1004
        ('YellowRestaurant'); --1005
 
-INSERT INTO dishes (name, price, date, restaurant_id)
+INSERT INTO dishes (name, price, dish_date, restaurant_id)
 VALUES ('Coffee', 2.95, '2021-04-12', 1002),                           --1006
        ('Tea', 1.25, '2021-04-12', 1003),                              --1007
        ('Oatmeal', 4.35, '2021-04-11', 1004),                          --1008
@@ -32,7 +32,7 @@ VALUES ('Coffee', 2.95, '2021-04-12', 1002),                           --1006
        ('Cheese Tomato & Red Onion Panini', 5.95, '2021-04-12', 1002), --1014
        ('Roast Ham & Pickle Sandwich', 5.45, '2021-04-11', 1004);      --1015
 
-INSERT INTO votes (date, user_id, restaurant_id)
+INSERT INTO votes (vote_date, user_id, restaurant_id)
 VALUES ('2021-04-11', 1000, 1002), --1016 / user
        ('2021-04-12', 1000, 1005), --1017 / user
        ('2021-04-11', 1001, 1003), --1018 / admin

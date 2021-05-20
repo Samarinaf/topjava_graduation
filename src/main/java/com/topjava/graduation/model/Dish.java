@@ -20,7 +20,7 @@ public class Dish extends AbstractBaseEntity {
     @NotNull
     private Double price;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "dish_date", nullable = false)
     @NotNull
     private LocalDate date;
 
